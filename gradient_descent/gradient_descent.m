@@ -2,13 +2,12 @@ function [ x, f ] = gradient_descent( F, Gr, x, k_max )
 % gradient descent algorithm
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
-% tolerance, size step
 k     = 1;
-ep    = 1e-3;
-alpha = 2e-1;
+ep    = 1e-6;   % tolerance
+alpha = 1e-1;   % step size
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% gradient descent %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-f(k) = F(x);          % evaluate objective for x_0
+f(k) = F(x);           % evaluate objective for x_0
 fprintf('gradient descent optimization\n');
 fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));
 
