@@ -9,7 +9,8 @@ b = 0.5;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% hill climbing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f(k) = F(x);                              % evaluate objective function for x_0
-fprintf('k = %-2d: x = %.3f | F(x) = %.3f\n', k, x, f(k));
+fprintf('hill climbing optimization\n');
+fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));
 
 while( k<k_max )
     k = k+1;
@@ -19,11 +20,11 @@ while( k<k_max )
 
         if( F(x_j) < F(x) )
             x = x_j;                      % accepted solution
-            fprintf('neighb: x = %.3f | F(x) = %.3f | new min\n', x, F(x));
+            fprintf('neighb: x = %-10s | F(x) = %.4f | new min\n', mat2str(x,2), F(x));
         end
     end
 
     f(k) = F(x);        % evaluate objective function
-    fprintf('k = %-2d: x = %.3f | F(x) = %.3f\n', k, x, f(k));    % show progress
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));   % show progress
 end
 end

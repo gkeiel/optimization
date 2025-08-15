@@ -14,13 +14,13 @@ Gr = @(x) [2*x(1)+x(2)-6; 4*x(2)+x(1)-10];
 x_0 = [1; 1];
 
 % maximum number of iterations
-k_max = 40;
+k_max = 20;
 
 
 %%%%%%%%%%%%%%%%%%%%%%% slect optimization solver %%%%%%%%%%%%%%%%%%%%%%%%%
 % solve for x
-%[ x, f ] = gradient_descent( F, Gr, x_0, k_max );
-%[ x, f ] = hill_climbing( F, x_0, k_max );
+[ x, f ] = gradient_descent( F, Gr, x_0, k_max );
+%[ x, f ] = hill_climbing( F, -x_0, k_max );
 [ x, f ] = simulated_annealing( F, x_0, k_max );
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

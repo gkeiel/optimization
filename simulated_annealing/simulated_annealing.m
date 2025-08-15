@@ -12,7 +12,8 @@ T = 0.7;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% simulated annealing %%%%%%%%%%%%%%%%%%%%%%%%%%%
 f(k) = F(x);                             % evaluate objective function for x_0
-fprintf('k = %-2d: x = %.3f | F(x) = %.3f | T = %.2f\n', k, x, f(k), T);
+fprintf('simulated annealing optimization\n');
+fprintf('k = %2d: x = %-10s | F(x) = %.4f | T = %.2f\n', k, mat2str(x,2), f(k), T)
 
 while( k<k_max )
     k = k+1;
@@ -23,12 +24,12 @@ while( k<k_max )
         % if objective function lower else go thorught probab. acceptance
         if( F(x_j) < F(x) )
             x = x_j;                     % new solution
-            fprintf('neighb: x = %.3f | F(x) = %.3f | new min\n', x, F(x));
+            fprintf('neighb: x = %-10s | F(x) = %.3f | new min\n', mat2str(x,2), F(x));
         else
             pb = exp( (F(x)-F(x_j))/T ); % probability threshold        
             if( rand(1,1) < pb )
                 x = x_j;                 % new solution (not best but accepted)
-                fprintf('neighb: x = %.3f | prob. = %.2f |\n', x, pb); 
+                fprintf('neighb: x = %-10s | prob. = %.2f |\n', mat2str(x,2), pb); 
             end
         end
     end
@@ -36,6 +37,6 @@ while( k<k_max )
     f(k) = F(x);        % evaluate objective function
     n    = 1*n;         % update number of neighbor (constant)
     T    = beta*T;      % update temperature
-    fprintf('k = %-2d: x = %.3f | F(x) = %.3f | T = %.2f\n', k, x, f(k), T);    % show progress
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f | T = %.2f\n', k, mat2str(x,2), f(k), T);    % show progress
 end
 end

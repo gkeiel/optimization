@@ -9,7 +9,8 @@ alpha = 2e-1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% gradient descent %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f(k) = F(x);          % evaluate objective for x_0
-fprintf('k = %2d: x = %-10s| F(x) = %.4f\n', k, mat2str(x,2), f(k));
+fprintf('gradient descent optimization\n');
+fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));
 
 while( k<k_max && abs( max(Gr(x)) )>ep ) % maximum iterations or optimality stop criterion
     k = k+1;
@@ -17,6 +18,6 @@ while( k<k_max && abs( max(Gr(x)) )>ep ) % maximum iterations or optimality stop
     x = x +alpha*d;    % gradient descent 
 
     f(k) = F(x);       % evaluate objective function
-    fprintf('k = %2d: x = %-10s| F(x) = %.4f\n', k, mat2str(x,2), f(k));    % show progress
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));    % show progress
 end
 end
