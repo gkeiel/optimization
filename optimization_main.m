@@ -11,10 +11,10 @@ Gr = @(x) [2*x(1)+20*pi*sin(2*pi*x(1)); 2*x(2)+20*pi*sin(2*pi*x(2))];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % initial solution
-x_0 = [3; 3];
+x_0 = [5; 5];
 
 % maximum number of iterations
-k_max = 50;
+k_max = 30;
 
 
 %%%%%%%%%%%%%%%%%%%%%%% slect optimization solver %%%%%%%%%%%%%%%%%%%%%%%%%
