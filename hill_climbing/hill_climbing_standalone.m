@@ -4,39 +4,49 @@ clc; clear; close all;
 
 %%%%%%%%%%%%%%%%%%%%%%%% insert function to optmize %%%%%%%%%%%%%%%%%%%%%%%
 % objective function
-F = @(x) x.*sin( 10*pi.*x ) +1;
+F  = @(x) x(1).^2 +2.*x(2).^2 +x(1).*x(2) -6.*x(1) -10.*x(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % initial solution
-x = 5;
+x = [5; 5];
 
 % maximum number of iterations
 k_max = 30;
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
-k    = 1;
-L    = 10;     % number of neighbors
-step = 1;      % step size limit
+k     = 1;
+alpha = 1;
+neig  = 5;
+tol   = 1e-6;
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% hill climbing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-f(k) = F(x);                                    % evaluate objective function for x_0
+f(1) = F(x);                                    % evaluate objective function for x_0
 fprintf('hill climbing optimization\n');
-fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));
+fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', 0, mat2str(x,2), f(1));
 
-while( k<k_max )
-    k = k+1;
+while( k<=k_max )                               % stopping criterion (number of iterations) 
+    k   = k+1;
+    f_i = F(x);                                 % evaluate objective function for x_i
+    
+    for aux  = 1:neig
+        x_j = x +alpha*(2*rand(size(x)) -1);    % random neighbor solution x_j     
+        f_j = F(x_j);                           % evaluate objective function for x_j
 
-    for aux  = 1:L
-        x_j  = x +(2*rand(size(x)) -1)*step;    % random neighbor solution x_j
-
-        if( F(x_j) < F(x) )
-            x = x_j;                            % accepted solution
-            fprintf('neighb: x = %-10s | F(x) = %.4f | new min\n', mat2str(x,2), F(x));
+        if( f_j < f_i )
+            x   = x_j;                          % accepted new solution
+            f_i = f_j;                          % new objective function
+            fprintf('neighb: x = %-10s | F(x) = %.4f | new min\n', mat2str(x,2), f_j);
         end
     end
 
-    f(k) = F(x);                                % evaluate objective function
-    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));   % show progress
+    f(k) = f_i;                                
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));  % show progress
+    if( abs(f(k)-f(k-1)) < tol )
+        fprintf('Converged: change < tol (%.e)\n', tol);
+        break;
+    end
 end
 
 % evolution of the objective function

@@ -1,7 +1,7 @@
 function [ x, f ] = gradient_descent( F, Gr, x, k_max, varargin )
 % gradient_descent performs gradient descent optimization
 %
-%   [x, f, k] = gradient_descent(F, Gr, x0, k_max, alpha, ep, verbose)
+%   [x, f] = gradient_descent(F, Gr, x0, k_max, alpha, ep, verbose)
 %
 % inputs:
 %   F      - function handle for objective function
@@ -43,7 +43,6 @@ end
 
 % initialize
 k = 1;
-f = zeros(1, k_max+1);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% gradient descent %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

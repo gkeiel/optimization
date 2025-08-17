@@ -18,16 +18,16 @@ k_max = 50;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
 k     = 1;
-ep    = 1e-3;   % tolerance
-alpha = 1e-1;   % step size
+alpha = 1e-1;
+tol   = 1e-3;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% gradient descent %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fprintf('gradient descent optimization\n');
 f(1) = F(x);    % evaluate objective function for x_0
 grad = Gr(x);   % evaluate gradient for x_0
+fprintf('gradient descent optimization\n');
 fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', 0, mat2str(x,2), f(1));
 
-while( k<=k_max && norm(grad)>ep ) % stopping criterion (number of iterations or optimality) 
+while( k<=k_max && norm(grad)>tol ) % stopping criterion (number of iterations or optimality) 
     k    = k+1;
     grad = Gr(x);         % gradient
     x    = x -alpha*grad; % move in descent direction 
