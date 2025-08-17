@@ -14,14 +14,14 @@ Gr = @(x) [2*x(1)+20*pi*sin(2*pi*x(1)); 2*x(2)+20*pi*sin(2*pi*x(2))];
 x_0 = [5; 5];
 
 % maximum number of iterations
-k_max = 50;
+k_max = 30;
 
 
 %%%%%%%%%%%%%%%%%%%%%%% slect optimization solver %%%%%%%%%%%%%%%%%%%%%%%%%
 % solve for x
-[ x, f ] = gradient_descent( F, Gr, x_0, k_max, 'Tol', 1e-6, 'Verbose', true );
+%[ x, f ] = gradient_descent( F, Gr, x_0, k_max, 'Tol', 1e-6, 'Verbose', true );
 %[ x, f ] = hill_climbing( F, -x_0, k_max, 'Tol', 1e-6, 'Verbose', true );
-%[ x, f ] = simulated_annealing( F, x_0, k_max );
+[ x, f ] = simulated_annealing( F, x_0, k_max, 'Tol', 1e-6, 'Verbose', true );
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % evolution of the objective function

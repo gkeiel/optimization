@@ -1,7 +1,7 @@
 function [ x, f ] = hill_climbing( F, x, k_max, varargin )
-% hill climbing algorithm
+% hill_climbing performs hill climbing optimization
 %
-%   [x, f] = hill_climbing(F, x0, k_max, 'alpha', 1, 'neig', 10, 'tol', 1e-6, 'verbose', true)
+%   [x, f] = hill_climbing(F, x_0, k_max, 'alpha', 1, 'neig', 10, 'tol', 1e-6, 'verbose', true)
 %
 % inputs:
 %   F      - function handle for objective function
@@ -22,7 +22,7 @@ function [ x, f ] = hill_climbing( F, x, k_max, varargin )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
 % default parameters
-alpha   = 1;
+alpha   = 2;
 neig    = 10;
 tol     = 1e-6;
 verbose = true;
@@ -65,7 +65,7 @@ while( k<=k_max )                               % stopping criterion (number of 
 
         if( f_j < f_i )
             x   = x_j;                          % accepted new solution
-            f_i = f_j;                          % new objective function
+            f_i = f_j;                          % objective function new value
             fprintf('neighb: x = %-10s | F(x) = %.4f | new min\n', mat2str(x,2), f_j);
         end
     end
@@ -75,11 +75,11 @@ while( k<=k_max )                               % stopping criterion (number of 
         fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k-1, mat2str(x,2), f(k));  % show progress
     end
     
-    if( abs(f(k)-f(k-1)) < tol )
-        if verbose
-            fprintf('Converged: change < tol (%.e)\n', tol);
-        end
-        break;
-    end  
+%     if( abs(f(k)-f(k-1)) < tol )
+%         if verbose
+%             fprintf('Converged: change < tol (%.e)\n', tol);
+%         end
+%         break;
+%     end  
 end
 end
