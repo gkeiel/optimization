@@ -14,32 +14,33 @@ Gr = @(x) [2*x(1)+x(2)-6; 4*x(2)+x(1)-10];
 x = [5; 5];
 
 % maximum number of iterations
-k_max = 30;
+k_max = 50;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
 k     = 1;
-ep    = 1e-6;   % tolerance
+ep    = 1e-3;   % tolerance
 alpha = 1e-1;   % step size
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% gradient descent %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-f(k) = F(x);           % evaluate objective for x_0
 fprintf('gradient descent optimization\n');
-fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));
+f(1) = F(x);    % evaluate objective function for x_0
+grad = Gr(x);   % evaluate gradient for x_0
+fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', 0, mat2str(x,2), f(1));
 
-while( k<k_max && abs( max(Gr(x)) )>ep ) % maximum iterations or optimality stop criterion
-    k = k+1;
-    d = -Gr(x);        % descent direction
-    x = x +alpha*d;    % gradient descent 
+while( k<=k_max && norm(grad)>ep ) % stopping criterion (number of iterations or optimality) 
+    k    = k+1;
+    grad = Gr(x);         % gradient
+    x    = x -alpha*grad; % move in descent direction 
 
-    f(k) = F(x);       % evaluate objective function
-    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));    % show progress
+    f(k) = F(x);          % evaluate objective function
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k-1, mat2str(x,2), f(k));  % show progress
 end
 
 % evolution of the objective function
 figure(1);
 plot(0:length(f)-1, f, 'LineWidth',2.5, 'color','k');
 title('Objective function evolution');
-xlabel('Iteration');
+xlabel('k');
 ylabel('f(x)');
 grid on;
 

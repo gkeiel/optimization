@@ -19,16 +19,16 @@ k_max = 30;
 
 %%%%%%%%%%%%%%%%%%%%%%% slect optimization solver %%%%%%%%%%%%%%%%%%%%%%%%%
 % solve for x
-%[ x, f ] = gradient_descent( F, Gr, x_0, k_max );
+[ x, f ] = gradient_descent( F, Gr, x_0, k_max, 'Tol', 1e-6, 'Verbose', true );
 %[ x, f ] = hill_climbing( F, -x_0, k_max );
-[ x, f ] = simulated_annealing( F, x_0, k_max );
+%[ x, f ] = simulated_annealing( F, x_0, k_max );
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % evolution of the objective function
 figure(1);
 plot(0:length(f)-1, f, 'LineWidth',2.5, 'color','k');
 title('Objective function evolution');
-xlabel('Iteration');
+xlabel('k');
 ylabel('f(x)');
 grid on;
 

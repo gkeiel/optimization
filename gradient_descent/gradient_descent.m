@@ -1,22 +1,67 @@
-function [ x, f ] = gradient_descent( F, Gr, x, k_max )
-% gradient descent algorithm
+function [ x, f ] = gradient_descent( F, Gr, x, k_max, varargin )
+% gradient_descent performs gradient descent optimization
+%
+%   [x, f, k] = gradient_descent(F, Gr, x0, k_max, alpha, ep, verbose)
+%
+% inputs:
+%   F      - function handle for objective function
+%   Gr     - function handle for gradient
+%   x_0    - initial guess (column vector)
+%   k_max  - maximum iterations
+%
+% name-value pairs (optional)
+%   'alpha'   - step size, default = 1e-1
+%   'tol'     - tolerance, default = 1e-6
+%   'verbose' - show progress, default = true
+%
+% outputs:
+%   x - solution vector
+%   f - history of objective function values
+%   k - number of iterations
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
-k     = 1;
-ep    = 1e-6;   % tolerance
-alpha = 1e-1;   % step size
+% default parameters
+alpha   = 1e-1;
+tol     = 1e-6;
+verbose = true;
+% parse name-value pairs
+for i = 1:2:length(varargin)
+    name  = lower(varargin{i});
+    value = varargin{i+1};
+    switch name
+        case 'alpha'
+            alpha = value;
+        case 'tol'
+            tol = value;
+        case 'verbose'
+            verbose = value;
+        otherwise
+            error('Unknown parameter name: %s', varargin{i});
+    end
+end
+
+% initialize
+k = 1;
+f = zeros(1, k_max+1);
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% gradient descent %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-f(k) = F(x);           % evaluate objective for x_0
-fprintf('gradient descent optimization\n');
-fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));
+f(1) = F(x);    % evaluate objective function for x_0
+grad = Gr(x);   % evaluate gradient for x_0
+if verbose
+    fprintf('gradient descent optimization\n');
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', 0, mat2str(x,2), f(1));
+end
 
-while( k<k_max && abs( max(Gr(x)) )>ep ) % maximum iterations or optimality stop criterion
-    k = k+1;
-    d = -Gr(x);        % descent direction
-    x = x +alpha*d;    % gradient descent 
+while( k<=k_max && norm(grad)>tol ) % stopping criterion (number of iterations or optimality) 
+    k    = k+1;
+    grad = Gr(x);         % gradient
+    x    = x -alpha*grad; % move in descent direction 
 
-    f(k) = F(x);       % evaluate objective function
-    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));    % show progress
+    f(k) = F(x);          % evaluate objective function
+    if verbose
+        fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k-1, mat2str(x,2), f(k));  % show progress
+    end
 end
 end
