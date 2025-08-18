@@ -4,20 +4,20 @@ clc; clear; close all;
 
 %%%%%%%%%%%%%%%%%%%%%%%% insert function to optmize %%%%%%%%%%%%%%%%%%%%%%%
 % objective function
-F  = @(x) x(1).^2 +2.*x(2).^2 +x(1).*x(2) -6.*x(1) -10.*x(2);
+F  = @(x) 20 +x(1).^2 -10.*cos(2*pi.*x(1)) +x(2).^2 -10.*cos(2*pi.*x(2)); % Rastrigin 2D 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % initial solution
 x = [5; 5];
 
 % maximum number of iterations
-k_max = 30;
+k_max = 50;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
 k     = 1;
 alpha = 1;
-neig  = 5;
+neig  = 10;
 tol   = 1e-6;
 
 
@@ -42,11 +42,11 @@ while( k<=k_max )                               % stopping criterion (number of 
     end
 
     f(k) = f_i;                                
-    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k, mat2str(x,2), f(k));  % show progress
-    if( abs(f(k)-f(k-1)) < tol )
-        fprintf('Converged: change < tol (%.e)\n', tol);
-        break;
-    end
+    fprintf('k = %2d: x = %-10s | F(x) = %.4f\n', k-1, mat2str(x,2), f(k));  % show progress
+%     if( abs(f(k)-f(k-1)) < tol )
+%         fprintf('Converged: change < tol (%.e)\n', tol);
+%         break;
+%     end
 end
 
 % evolution of the objective function

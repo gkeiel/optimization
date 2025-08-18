@@ -11,7 +11,7 @@ F  = @(x) 20 +x(1).^2 -10.*cos(2*pi.*x(1)) +x(2).^2 -10.*cos(2*pi.*x(2)); % Rast
 x = [5; 5];
 
 % maximum number of iterations
-k_max = 30;
+k_max = 50;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% initialize parameters %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,8 +69,8 @@ grid on;
 
 if length(x) == 2
     % create grid
-    x_1 = -5:0.2:5;
-    x_2 = -5:0.2:5;
+    x_1 = -5:0.05:5;
+    x_2 = -5:0.05:5;
     [X1, X2] = meshgrid(x_1, x_2);
     Z = arrayfun(@(a, b) F([a; b]), X1, X2);
     
