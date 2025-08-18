@@ -21,7 +21,7 @@ The abundance of local minima underlines the need for a global optimization algo
 
 For any of the techniques used the solution obtained should converge to $x = [0;\\ 0]$ where $f(x) = 0$, as can be seen marked in the figure.
 
-<img width="1920" height="926" alt="optimization" src="https://github.com/user-attachments/assets/a192241e-70ca-4f1d-b5b5-0e40cbf76ebd" />
+<img width="1920" height="926" alt="optimization" src="https://github.com/user-attachments/assets/4af190b0-5e7d-4fcf-bc5e-ab4026103ae0"/>
 
 For the simulated annealing algorithm the following log was obtained:
 ```txt
