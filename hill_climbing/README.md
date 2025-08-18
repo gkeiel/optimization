@@ -14,7 +14,7 @@ where the aim is to solve x for the minimum value of $f(x)$.
 
 The solution obtained should converge to $x = [0;\ 0]$ where $f(x) = 0$, as can be seen marked in the figure.
 
-<img width="1920" height="926" alt="optimization" src="https://github.com/user-attachments/assets/a192241e-70ca-4f1d-b5b5-0e40cbf76ebd"/>
+<img width="1920" height="926" alt="optimization" src="https://github.com/user-attachments/assets/da399833-4494-4f78-ac8e-dda63bc84b71"/>
 
 For the hill climbing algorithm the following log was obtained:
 ```txt
